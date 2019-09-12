@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ShareForceOne.Models.CarModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="AddCar">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CarRegNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarBrand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarBrandModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarFuelConsumption)
+            </th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CarRegNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CarBrand)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CarBrandModel)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CarFuelConsumption)
+                    </td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CarId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.CarId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.CarId">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

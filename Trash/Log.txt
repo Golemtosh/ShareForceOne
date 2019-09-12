@@ -1,0 +1,46 @@
+﻿Nattkodning 2019-09-11 - Toams
+
+1.	Ändrade så länkarna i navbaren som går mot controllern ShareForceOne. 
+	Nu fungerar dom 3. 
+
+2.	Skapade ny kontroller för User och skrev ungefär som på YT
+	https://www.youtube.com/watch?v=GblxFZpR10w
+	Vi försökte använda ShareForceOne controllern, men jag 
+	insåg att detta var nog bättre.
+
+3.	Modifierade koden som han gjort på YT så det inte bara blev en 
+	testanvändare när man callade sidan utan att den riktigt tog 
+	in modellen ifrån SignUp (fd Register) viewn.
+
+4.	Döpte om Register viewn till SignUp då den krockade med 
+	själva "skapande" scriptet i controllern User som jag smart nog
+	döpt till Register xD 
+
+5.	Modifierad kod för att skapa en testanvändare ligger kvar 
+	och jag har kommenterat i controllern så vi kan använda 
+	den sedan om vi skulle önska. 
+
+6.	Hade problem med att köra igång SignUp view men det visade 
+	sig att man inte kunde använda asp-area="identity"
+	Då krockar den med asp-controller.
+	
+7.	Jag skapade en "tom" Index view i user som vi sedan kan 
+	byta ut till lämpligt. nu är det mest för att se att man 
+	kom vidare efter SignUp.
+
+8.	Var in och skrev kommentar i Account view att den nog 
+	kan tas bort, ville inte göra det nu. Bättre vi väntar 
+	och ser då vi inte har 100% koll på hur det hänger ihop.
+
+9.	Skulle rekommendera att deleta databas och sedan köra 
+	migration och update innan ni testar. 
+	Det fungerade kanon för mig och den skapade en användare.
+	Ni får kolla i DB om det lyckades eller prova logga in
+	då vi inte har någon detail funktion för användare ännu.
+
+	Självklart får vi snygga till med meddelanden osv sedan.
+
+10.	Har inte lagt någon tid på "kontroll" så vi måste sätta in 
+	modelstate osv när vi skapar användaren. 
+
+	Men det är morgondagens problem.

@@ -1,0 +1,60 @@
+﻿@model ShareForceOne.Models.TripModel
+
+@{
+    ViewData["Title"] = "TripCreate";
+}
+<h4>Create Trip</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="TripDBCreate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TripCarId" class="control-label"></label>
+                <input asp-for="TripCarId" class="form-control" />
+                <span asp-validation-for="TripCarId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TripStartCoord" class="control-label"></label>
+                <input asp-for="TripStartCoord" class="form-control" />
+                <span asp-validation-for="TripStartCoord" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TripStopCoord" class="control-label"></label>
+                <input asp-for="TripStopCoord" class="form-control" />
+                <span asp-validation-for="TripStopCoord" class="text-danger"></span>
+            </div>           
+            <div class="form-group">
+                <label asp-for="TripDateTime" class="control-label"></label>
+                <input asp-for="TripDateTime" class="form-control" />
+                <span asp-validation-for="TripDateTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TripCarSeats" class="control-label"></label>
+                <input asp-for="TripCarSeats" class="form-control" />
+                <span asp-validation-for="TripCarSeats" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TripAnimals" class="control-label"></label>
+                <input asp-for="TripAnimals" class="form-control" />
+                <span asp-validation-for="TripAnimals" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TripInfoText" class="control-label"></label>
+                <input asp-for="TripInfoText" class="form-control" />
+                <span asp-validation-for="TripInfoText" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
