@@ -1,4 +1,4 @@
-﻿
+﻿@using ShareForceOne;
 @{
     ViewData["Title"] = "Index";
 }
@@ -78,4 +78,4 @@
     }
 </script>
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"></script>
+<script async defer src="@Keys.GoogleApiKey()"></script>

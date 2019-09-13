@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 // Grek är salladsskålar
 namespace ShareForceOne
 {
-    public class Program
+    public partial class Program
     {
         public static void Main(string[] args)
         {           
