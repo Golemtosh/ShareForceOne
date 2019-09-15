@@ -10,8 +10,14 @@ a.navbar-brand {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
+body {
+    margin-bottom: 60px;
+}
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -34,84 +40,31 @@ button.accept-policy {
   line-height: inherit;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
 .footer {
   position: absolute;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
-  /* Set the fixed height of the footer here */
+ 
   height: 60px;
-  line-height: 60px; /* Vertically center the text there */
+  line-height: 60px;  
 }
+/* Meep */
 
 #map {
-    height: 400px;
-    width: 70%;
-    float:left;
+    height: 500px;
+    width: 90%;   
 }
-/*#map-canvas {
-    height: 100%;
-    width: 100%;
-    margin: 0px;
-    padding: 0px
-}*/
 
-/*#right-panel {
+#floating-panel {
+    
+    left: 25%;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    
+    text-align: center;
     font-family: 'Roboto','sans-serif';
     line-height: 30px;
     padding-left: 10px;
 }
-
-    #right-panel select, #right-panel input {
-        font-size: 15px;
-    }
-
-    #right-panel select {
-        width: 100%;
-    }
-
-    #right-panel i {
-        font-size: 12px;
-    }
-
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-#map {
-    height: 100%;
-    float: left;
-    width: 70%;
-    height: 100%;
-}
-
-#right-panel {
-    margin: 20px;
-    border-width: 2px;
-    width: 20%;
-    height: 400px;
-    float: right;
-    text-align: left;
-    padding-top: 0;
-}
-
-#directions-panel {
-    margin-top: 10px;
-    background-color: #FFEE77;
-    padding: 10px;
-    overflow: scroll;
-    height: 174px;
-}*/
