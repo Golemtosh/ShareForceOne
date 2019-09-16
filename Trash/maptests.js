@@ -15,22 +15,25 @@
             map = new google.maps.Map(document.getElementById('map'), {
                 center: sundsvall,
                 zoom: 13
+                
             });
 
             map.addListener('click', function (e) {
                 console.log(e);
                 addMarker(e.latLng);
+                
 
-            });
+});
 
-            infoWindow = new google.maps.InfoWindow;
+infoWindow = new google.maps.InfoWindow;
 
-            // Try HTML5 geolocation.
+// Try HTML5 geolocation.
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
                     var pos = {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
+                        
                     };
 
                     infoWindow.setPosition(pos);
@@ -41,6 +44,7 @@
                         map: map,
                         position: { lat: position.coords.latitude, lng: position.coords.longitude },
                         draggable: true
+                        
                     });
 
 
@@ -66,8 +70,12 @@
             let marker = new google.maps.Marker({
                 map: map,
                 position: latLng,
+                
                 draggable: true
-            });
+    
+});
+
+ 
             //store the marker object drawn on map in global array
             markersArray.push(marker);
 
@@ -107,7 +115,11 @@
             setMapOnAll(null);
         }
 
-        // Shows any markers currently in the array.
+
+    map.entities.push(driverPosition);
+}
+
+    // Shows any markers currently in the array.
         function showMarkers() {
             setMapOnAll(map);
         }
@@ -120,7 +132,7 @@
 
     </script>*@
 
-@*<script>
+    @*<script>
 
         let map;
         var infoWindow;
@@ -139,11 +151,12 @@
             map.addListener('click', function (e) {
                 console.log(e);
                 addMarker(e.latLng);
-            });
-        }
+               
+});
+}
 
-        infoWindow = new google.maps.InfoWindow;
-        // Try HTML5 geolocation.
+infoWindow = new google.maps.InfoWindow;
+// Try HTML5 geolocation.
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
                 var pos = {

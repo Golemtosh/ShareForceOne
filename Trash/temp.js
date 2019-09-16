@@ -13,7 +13,8 @@ function mapLocation() {
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     directionsDisplay.setMap(map);
     google.maps.event.addDomListener(document.getElementById('routebtn'), 'click', calcRoute);
-  }
+    }
+
 
   function calcRoute() {
     var start = new google.maps.LatLng(37.334818, -121.884886);
