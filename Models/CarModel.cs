@@ -11,6 +11,7 @@ namespace ShareForceOne.Models
     {
         [Key]
         public int CarId { get; set; }
+
         [DisplayName("Reg number")]
         public string CarRegNumber { get; set; }
 

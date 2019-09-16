@@ -29,6 +29,12 @@ namespace ShareForceOne.Controllers
             return View(cars);
         }
 
+        public IActionResult AdminListCars()
+        {
+            var cars = from c in _context.Cars select c;
+            return View(cars);
+        }
+
         public IActionResult AddCar()
         {
             return View();
@@ -57,5 +63,35 @@ namespace ShareForceOne.Controllers
 
             return View(nameof(Index));
         }
+
+        // DELETE       
+        public async Task<IActionResult> AdminDeleteCar(int? id)
+        {           
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var car = await _context.Cars
+                .FirstOrDefaultAsync(m => m.CarId == id);
+            if (car == null)
+            {
+                return NotFound();
+            }
+            
+            return View(car);
+        }
+
+        // Delete
+        [HttpPost, ActionName("AdminDeleteCar")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var car = await _context.Cars.FindAsync(id);
+            _context.Cars.Remove(car);
+            await _context.SaveChangesAsync();
+           
+            return RedirectToAction(nameof(AdminListCars));
+        }        
     }
 }

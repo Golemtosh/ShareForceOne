@@ -68,3 +68,10 @@ button.accept-policy {
     line-height: 30px;
     padding-left: 10px;
 }
+
+
+/* custom */
+
+.admin-trips-view{
+    font-size: 8px;
+}

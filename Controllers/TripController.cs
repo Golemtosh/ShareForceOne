@@ -43,5 +43,14 @@ namespace ShareForceOne.Controllers
             return View(nameof(Index));
         }
 
+        public IActionResult AdminListTrips()
+        {
+            var trips = from c in _context.TripModel
+                       
+                       select c;
+
+            return View(trips);
+        }
+
     }
 }

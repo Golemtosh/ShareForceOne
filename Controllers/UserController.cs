@@ -5,20 +5,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using ShareForceOne.Data;
 using ShareForceOne.Models;
 
 namespace ShareForceOne.Controllers
 {
     public class UserController : Controller
     {
+        private readonly ApplicationDbContext _context;
+
         public UserManager<ApplicationUser> UserMgr { get; }
         public SignInManager<ApplicationUser> SignInMgr { get; }
 
         public UserController(UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager, ApplicationDbContext context)
         {
             UserMgr = userManager;
             SignInMgr = signInManager;
+            _context = context;
         }
 
         [HttpPost]
@@ -80,6 +84,30 @@ namespace ShareForceOne.Controllers
             return View(nameof(Index));
         }
 
+        public IActionResult AdminListUsers()
+        {
+
+            var users = from c in _context.Users select c;
+            var userList = new List<UserViewModel>();
+            foreach (var item in users)
+            {
+                var userModel = new UserViewModel();
+
+                userModel.FirstName = item.FirstName;
+                userModel.LastName = item.LastName;
+                userModel.Gender = item.Gender;
+                userModel.PhoneNumber = item.PhoneNumber;
+                userModel.City = item.City;
+                userModel.Email = item.Email;
+                userModel.ConfirmEmail = item.Email;
+                userModel.Password = "Not Avaiable";
+                userModel.ConfirmPassword = "Not Avaiable";
+
+                userList.Add(userModel);
+            }
+
+            return View(userList);
+        }
 
     }
 }

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ShareForceOne.Models.CarModel>
+
+@{
+    ViewData["Title"] = "AdminListCars";
+}
+
+<table class="table">
+    <thead>
+        <tr style="font-size: 10px;">
+            <th>
+                @Html.DisplayNameFor(model => model.CarRegNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarBrand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarBrandModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarFuelConsumption)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CarCreator)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr style="font-size: 10px;">
+            <td>
+                @Html.DisplayFor(modelItem => item.CarRegNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarBrand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarBrandModel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarFuelConsumption)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarCreator)
+            </td>
+            <td>
+                <a asp-action="AdminDeleteCar" asp-route-id="@item.CarId"><input type="button" class="btn btn-danger" value="Delete"/></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
