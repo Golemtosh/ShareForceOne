@@ -11,17 +11,23 @@ namespace ShareForceOne.Models
     {
         [Key]
         public int TripId { get; set; }
+
+        [DisplayName("Car to use")]
         public int TripCarId { get; set; }
+
+        [DisplayName("Start position")]
         public string TripStartCoord { get; set; }
+
+        [DisplayName("End position")]
         public string TripStopCoord { get; set; }
 
         [DisplayName("Creator")]
         public string TripCreator { get; set; }
-        
+
         [DisplayName("Cost per KM")]
         public decimal TripKMCost { get; set; }
 
-        [DisplayName("Date")]
+        [DisplayName("Date and start time")]
         public DateTime TripDateTime { get; set; }
 
         [DisplayName("Available seats")]
