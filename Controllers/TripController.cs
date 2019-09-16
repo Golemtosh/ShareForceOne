@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ShareForceOne.Data;
 using ShareForceOne.Models;
 
@@ -50,6 +51,35 @@ namespace ShareForceOne.Controllers
                        select c;
 
             return View(trips);
+        }
+
+        // DELETE       
+        public async Task<IActionResult> AdminDeleteTrip(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var trip = await _context.TripModel.FirstOrDefaultAsync(m => m.TripId == id);
+            if (trip == null)
+            {
+                return NotFound();
+            }
+
+            return View(trip);
+        }
+
+        // Delete
+        [HttpPost, ActionName("AdminDeleteTrip")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var trip = await _context.TripModel.FindAsync(id);
+            _context.TripModel.Remove(trip);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(AdminListTrips));
         }
 
     }

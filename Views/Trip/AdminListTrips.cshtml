@@ -70,9 +70,7 @@
                         @Html.DisplayFor(modelItem => item.TripInfoText)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.TripId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.TripId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.TripId">Delete</a>
+                        <a asp-action="AdminDeleteTrip" asp-route-id="@item.TripId"><input type="button" class="btn btn-danger" value="Delete" /></a>
                     </td>
                 </tr>
         

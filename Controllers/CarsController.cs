@@ -52,9 +52,7 @@ namespace ShareForceOne.Controllers
             }
 
             if (ModelState.IsValid)
-            {
-
-              
+            {            
                 carModel.CarCreator = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 _context.Add(carModel);
                 await _context.SaveChangesAsync();
@@ -72,8 +70,7 @@ namespace ShareForceOne.Controllers
                 return NotFound();
             }
 
-            var car = await _context.Cars
-                .FirstOrDefaultAsync(m => m.CarId == id);
+            var car = await _context.Cars.FirstOrDefaultAsync(m => m.CarId == id);
             if (car == null)
             {
                 return NotFound();
