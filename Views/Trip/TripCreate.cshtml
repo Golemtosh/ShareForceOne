@@ -9,14 +9,15 @@
     <div>
         <div class="container">
             <div class="row">
-                <div class="col-md-6 align-self-center" style="padding: 8px;"><a class="btn btn-primary btn-block border rounded" role="button" asp-area="" asp-controller="Trip" asp-action="TripCreate">Create</a></div>
-                <div class="col-md-6" style="padding: 8px;"><button class="btn btn-primary btn-block border rounded" type="button">Button</button></div>
+                
+                <div class="col-md-4" style="padding: 8px;"><button class="btn btn-primary btn-block border rounded" type="button" onclick="clearMarkers();">Clear</button></div>
             </div>
         </div>
     </div>
     <div class="container" style="vertical-align: text-top; border: 0px solid #000000">
         <div class="row" style="vertical-align: text-top; border: 0px solid #000000">
             <div class="col-md-8 d-md-flex justify-content-md-center align-items-md-start" style="padding: 8px; vertical-align: text-top; border: 0px solid #000000">
+                
                 @*MAP*@
                 <div class="container" id="map" style="vertical-align: text-top; border: 0px solid #000000"></div>
                 <script>
@@ -57,6 +58,8 @@
                             addMarker(e.latLng);
                         });
 
+                        
+
                         var onChangeHandler = function () {
                             calculateAndDisplayRoute(directionsService, directionsRenderer);
                         };
@@ -73,6 +76,8 @@
                             onChangeHandler();
 
                         }
+
+                        
 
                         function calculateAndDisplayRoute(directionsService, directionsRenderer) {
                             directionsService.route(
@@ -93,6 +98,19 @@
                             document.getElementById("TripStopCoord").value = markersArray[1].position;
                         }
                     }
+
+                    // Clear Markers
+                    function clearMarkers() {
+                        setMapOnAll(null);
+                        markersArray = [];
+                    }
+                    // Sets the map on all markers in the array.
+                    function setMapOnAll(map) {
+                        for (var i = 0; i < markersArray.length; i++) {
+                            markersArray[i].setMap(map);
+                        }
+                        }
+
                 </script>
 
             </div>
