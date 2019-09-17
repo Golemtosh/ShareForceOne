@@ -112,6 +112,6 @@ namespace ShareForceOne.Controllers
 
             return longitude;
         }
-
+       
     }
 }

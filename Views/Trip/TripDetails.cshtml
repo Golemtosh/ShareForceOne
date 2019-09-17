@@ -5,115 +5,133 @@
 }
 
 
-            <div border: 1px solid #000000">
-                <div id="trip_show_map"></div>
-            </div>
-            <script>
+<div border: 1px solid #000000">
+    <div id="trip_show_map"></div>
+</div>
+<script>
                 function initMap() {
 
                     let markersArray = [];
 
-                    var posStart = {
-                                    lat: @TripController.GetLatFromId(Model.TripStartCoord),
-                                    lng: @TripController.GetLonFromId(Model.TripStartCoord)
-                    };
-                    var posStop = {
-                                    lat: @TripController.GetLatFromId(Model.TripStopCoord),
-                                    lng: @TripController.GetLonFromId(Model.TripStopCoord)
-                                };
-                    
+                    var posStart = { lat: @TripController.GetLatFromId(Model.TripStartCoord), lng: @TripController.GetLonFromId(Model.TripStartCoord) };
+                    var posStop = { lat: @TripController.GetLatFromId(Model.TripStopCoord), lng: @TripController.GetLonFromId(Model.TripStopCoord) };
+
                     var map = new google.maps.Map(document.getElementById('trip_show_map'), {
                         zoom: 13,
                         center: { lat: @TripController.GetLatFromId(Model.TripStartCoord), lng: @TripController.GetLonFromId(Model.TripStartCoord) }
                     });
 
-                    //function addMarker(latLng) {
-                    //        let marker = new google.maps.Marker({
-                    //            map: map,
-                    //            position: latLng,
-                    //            icon: "../img/police.png"
-                    //            //draggable: true
-                    //        });
+                    //let marker1 = new google.maps.Marker({
+                    //    map: map,
+                    //    position: { lat: 62.39, lng: 17.30 }
+                        
+                    //});
 
-                    //        markersArray.push(marker);
+                    let marker = new google.maps.Marker({
+                        map: map,
+                        position: posStart            
+                    });
 
-                    //        onChangeHandler();
 
-                    //    }
-                    //markersArray[0].position;
-                    //markersArray[1].position;
+                    var directionsService = new google.maps.DirectionsService();
+                    var directionsRenderer = new google.maps.DirectionsRenderer();
+
+                    directionsRenderer.setMap(map);
+
+                    calculateAndDisplayRoute(directionsService, directionsRenderer);
+
+                    function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+                            directionsService.route(
+                                {
+                                    origin: posStart,
+                                    destination: posStop,
+                                    travelMode: 'DRIVING'
+                                },
+                                function (response, status) {
+                                    if (status === 'OK') {
+                                        directionsRenderer.setDirections(response);
+
+                                    } else {
+                                        window.alert('Directions request failed due to ' + status);
+                                    }
+                                });
+                            
+                        }
+
+
+                            //markersArray.push(marker);
                 }
 
 
-            </script>
-            @*<script src="~/js/TripShow.js" asp-append-version="true"></script>*@
+</script>
+@*<script src="~/js/TripShow.js" asp-append-version="true"></script>*@
 
-        
-            <div>
-                <h4>Info</h4>
-                <hr />
-                <dl class="row" style="border: 1px solid #000000">
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.TripCarId)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.TripCarId)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.TripStartCoord)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.TripStartCoord)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.TripStopCoord)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.TripStopCoord)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.TripCreator)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.TripCreator)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.TripKMCost)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.TripKMCost)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.TripDateTime)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.TripDateTime)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.TripCarSeats)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.TripCarSeats)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.TripAnimals)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.TripAnimals)
-                    </dd>
-                    <dt class="col-sm-2">
-                        @Html.DisplayNameFor(model => model.TripInfoText)
-                    </dt>
-                    <dd class="col-sm-10">
-                        @Html.DisplayFor(model => model.TripInfoText)
-                    </dd>
-                </dl>
-            </div>
-            <div>
-                <a asp-action="Edit" asp-route-id="@Model.TripId">Edit</a> |
-                <a asp-action="Index">Back to List</a>
-            </div>
-  
 
-               
+<div>
+    <h4>Info</h4>
+    <hr />
+    <dl class="row" style="border: 1px solid #000000">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TripCarId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TripCarId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TripStartCoord)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TripStartCoord)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TripStopCoord)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TripStopCoord)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TripCreator)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TripCreator)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TripKMCost)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TripKMCost)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TripDateTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TripDateTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TripCarSeats)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TripCarSeats)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TripAnimals)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TripAnimals)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TripInfoText)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TripInfoText)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.TripId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+
 <script async defer src="@Keys.GoogleApiKey()"></script>
