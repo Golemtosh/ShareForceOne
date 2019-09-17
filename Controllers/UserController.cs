@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ShareForceOne.Data;
 using ShareForceOne.Models;
@@ -93,6 +94,7 @@ namespace ShareForceOne.Controllers
             {
                 var userModel = new UserViewModel();
 
+                
                 userModel.FirstName = item.FirstName;
                 userModel.LastName = item.LastName;
                 userModel.Gender = item.Gender;
@@ -107,6 +109,68 @@ namespace ShareForceOne.Controllers
             }
 
             return View(userList);
+        }
+
+        // DELETE   PROBLEM!     
+        public async Task<IActionResult> AdminDeleteUser(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var users = from c in _context.Users select c;
+            foreach (var item in users)
+            {
+                if(item.Email == id)
+                {
+                    var userModel = new UserViewModel();
+
+                    userModel.FirstName = item.FirstName;
+                    userModel.LastName = item.LastName;
+                    userModel.Gender = item.Gender;
+                    userModel.PhoneNumber = item.PhoneNumber;
+                    userModel.City = item.City;
+                    userModel.Email = item.Email;
+                    userModel.ConfirmEmail = item.Email;
+                    userModel.Password = "Not Avaiable";
+                    userModel.ConfirmPassword = "Not Avaiable";
+
+                    return View(userModel);
+                }                
+            }
+
+            return NotFound();
+        }
+
+        // Delete
+        [HttpPost, ActionName("AdminDeleteUser")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            string identityId = null;
+
+            var users = from c in _context.Users select c;
+            
+            foreach (var item in users)
+            {
+                if (item.Email == id)
+                {
+                    identityId = item.Id;                   
+                }
+            }
+
+            if(identityId != null)
+            {
+                var user = await _context.Users.FindAsync(identityId);
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction(nameof(AdminListUsers));
+            }
+
+            return NotFound();
+
         }
 
     }

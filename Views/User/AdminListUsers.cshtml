@@ -28,12 +28,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.ConfirmEmail)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Password)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ConfirmPassword)
-            </th>
+            </th>*@
             <th></th>
         </tr>
     </thead>
@@ -61,17 +61,19 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ConfirmEmail)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Password)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ConfirmPassword)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+            </td>*@
+        <td>
+            @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@
+            @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
+            @*<a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+            <a asp-action="AdminDeleteUser" asp-route-id="@item.Email"><input type="button" class="btn btn-danger" value="Delete" /></a> @item.Email
+
+        </td>
         </tr>
 }
     </tbody>

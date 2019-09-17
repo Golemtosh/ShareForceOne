@@ -11,6 +11,7 @@ namespace ShareForceOne.Models
     {
         [Key]
         public int Id { get; set; }
+        
 
         [Required(ErrorMessage="Must provide first name.")]
         [StringLength(50, MinimumLength = 2, ErrorMessage ="Must be between 2 and 50 characters.")]
