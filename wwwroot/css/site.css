@@ -69,9 +69,19 @@ button.accept-policy {
     padding-left: 10px;
 }
 
-
+/* ShowTrip*/
+#trip_show_map {
+    height: 500px;
+    width: 90%;
+}
 /* custom */
 
 .admin-trips-view{
     font-size: 8px;
+}
+.list_text_8 {
+    font-size: 8px;
+}
+.list_text_10 {
+    font-size: 10px;
 }

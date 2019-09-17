@@ -23,11 +23,23 @@ namespace ShareForceOne.Controllers
         {
             return View();
         }
+
+        public IActionResult TripDetails(int id)
+        {
+            var trip = _context.TripModel.Find(id);
+            return View(trip);           
+        }
+
+        public IActionResult ListTrips()
+        {
+            var trips = from c in _context.TripModel select c;
+            return View(trips);
+        }
+
         public IActionResult TripCreate()
         {
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> TripDBCreate(TripModel tripModel)
@@ -80,6 +92,25 @@ namespace ShareForceOne.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(AdminListTrips));
+        }
+
+        // FUNCTIONS
+        public static string GetLatFromId(string lat)
+        {
+        
+            string latiuder = lat.Substring(1, 16);
+            Console.WriteLine(latiuder);
+            
+
+            return latiuder;
+        }
+        public static string GetLonFromId(string lon)
+        {
+
+          string longitude = lon.Substring(19, 15);
+            
+
+            return longitude;
         }
 
     }
