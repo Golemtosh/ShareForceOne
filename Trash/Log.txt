@@ -44,3 +44,40 @@
 	modelstate osv när vi skapar användaren. 
 
 	Men det är morgondagens problem.
+
+
+	geocoder.geocode({ 'location': @item.TripStartCoord}, function (results, status) {
+                                    if (status === 'OK') {
+                                        if (results[0]) {
+                                            //document.getElementById('startCoordLabel').innerHTML = results[0].formatted_address;
+                                            return results[0].formatted_address;
+                                        }
+                                        else {
+                                            window.alert('No results found');
+                                        }
+                                    }
+                                    else {
+                                        window.alert('Geocoder failed due to: ' + status);
+                                    }
+                                });
+
+
+
+								<script type="text/javascript">
+
+                           
+
+                                var geocoder = new google.maps.Geocoder;
+                                var posStart = { lat: @TripController.GetLatFromId(item.TripStartCoord), lng: @TripController.GetLonFromId(item.TripStartCoord) };
+
+                                geocoder.geocode({ 'location': posStart }, function (results, status)
+                                {
+                                        
+                                    document.getElementById('startCoordLabel').innerHTML = "hej";
+
+                                                //return results[0].formatted_address;
+                                        
+                                });
+                           
+
+                        </script>

@@ -10,8 +10,8 @@
     <thead>
         <tr class="list_text_10">
             @*<th>
-                @Html.DisplayNameFor(model => model.TripCarId)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.TripCarId)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.TripStartCoord)
             </th>
@@ -19,62 +19,72 @@
                 @Html.DisplayNameFor(model => model.TripStopCoord)
             </th>
             @*<th>
-                @Html.DisplayNameFor(model => model.TripCreator)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.TripCreator)
+                </th>*@
             @*<th>
-                @Html.DisplayNameFor(model => model.TripKMCost)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.TripKMCost)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.TripDateTime)
             </th>
             @*<th>
-                @Html.DisplayNameFor(model => model.TripCarSeats)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TripAnimals)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.TripCarSeats)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TripAnimals)
+                </th>*@
             @*<th>
-                @Html.DisplayNameFor(model => model.TripInfoText)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.TripInfoText)
+                </th>*@
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr class="list_text_10">
-            @*<td>
-                @Html.DisplayFor(modelItem => item.TripCarId)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.TripStartCoord)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TripStopCoord)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.TripCreator)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TripKMCost)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.TripDateTime)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.TripCarSeats)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TripAnimals)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TripInfoText)
-            </td>*@
-            <td>
-                @*<a asp-action="Edit" asp-route-id="@item.TripId">Edit</a> |*@
-                <a asp-action="TripDetails" asp-route-id="@item.TripId">Details</a> 
-                @*<a asp-action="Delete" asp-route-id="@item.TripId">Delete</a>*@
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+
+
+
+            <tr class="list_text_10">
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.TripCarId)
+                    </td>*@
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.TripStartCoord)*@
+                    <label id="@item.TripId">
+                        @item.TripId
+                    </label>
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.TripStopCoord)*@
+                    <label id="stopCoordLabel">
+                        @item.TripId
+                    </label>
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.TripCreator)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TripKMCost)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.TripDateTime)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.TripCarSeats)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TripAnimals)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TripInfoText)
+                    </td>*@
+                <td>
+                    @*<a asp-action="Edit" asp-route-id="@item.TripId">Edit</a> |*@
+                    <a asp-action="TripDetails" asp-route-id="@item.TripId">Details</a>
+                    @*<a asp-action="Delete" asp-route-id="@item.TripId">Delete</a>*@
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
