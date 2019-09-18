@@ -1,5 +1,5 @@
 ﻿@model ShareForceOne.Models.TripModel
-
+@using ShareForceOne.Controllers;
 @{
     ViewData["Title"] = "TripCreate";
 }
@@ -9,7 +9,7 @@
     <div>
         <div class="container">
             <div class="row">
-                
+
                 <div class="col-md-4" style="padding: 8px;"><button class="btn btn-primary btn-block border rounded" type="button" onclick="clearMarkers();">Clear</button></div>
             </div>
         </div>
@@ -17,7 +17,7 @@
     <div class="container" style="vertical-align: text-top; border: 0px solid #000000">
         <div class="row" style="vertical-align: text-top; border: 0px solid #000000">
             <div class="col-md-8 d-md-flex justify-content-md-center align-items-md-start" style="padding: 8px; vertical-align: text-top; border: 0px solid #000000">
-                
+
                 @*MAP*@
                 <div id="map" style="vertical-align: text-top; border: 0px solid #000000"></div>
                 <script>
@@ -58,7 +58,7 @@
                             addMarker(e.latLng);
                         });
 
-                        
+
 
                         var onChangeHandler = function () {
                             calculateAndDisplayRoute(directionsService, directionsRenderer);
@@ -78,7 +78,7 @@
 
                         }
 
-                        
+
 
                         function calculateAndDisplayRoute(directionsService, directionsRenderer) {
                             directionsService.route(
@@ -95,10 +95,55 @@
                                         window.alert('Directions request failed due to ' + status);
                                     }
                                 });
+                            var mA = markersArray[0].position;
 
                             document.getElementById("TripStartCoord").value = markersArray[0].position;
                             document.getElementById("TripStopCoord").value = markersArray[1].position;
-             
+
+
+                            //Geocode Name start
+                            var geocoder = new google.maps.Geocoder;
+
+                            geocoder.geocode({ 'location': markersArray[0].position }, function (results, status)
+                            {
+                                if (status === 'OK')
+                                {
+                                    if (results[0])
+                                    {
+                                        document.getElementById('startCoordInput').innerHTML = results[0].formatted_address;
+                                        document.getElementById("TripStartCoord").value = markersArray[0].position;
+                                    }
+                                    else
+                                    {
+                                        window.alert('No results found');
+                                    }
+                                }
+                                else
+                                {
+                                  window.alert('Geocoder failed due to: ' + status);
+                                }
+                            });
+                            geocoder.geocode({ 'location': markersArray[1].position }, function (results, status)
+                            {
+                                if (status === 'OK')
+                                {
+                                    if (results[0])
+                                    {
+                                        document.getElementById('stopCoordInput').innerHTML = results[0].formatted_address;
+                                        document.getElementById("TripStopCoord").value = markersArray[1].position;
+                                    }
+                                    else
+                                    {
+                                        window.alert('No results found');
+                                    }
+                                }
+                                else
+                                {
+                                  window.alert('Geocoder failed due to: ' + status);
+                                }
+                            });
+
+                            // End
                         }
                     }
 
@@ -130,15 +175,23 @@
                                 <span asp-validation-for="TripCarId" class="text-danger"></span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="TripStartCoord" class="control-label"></label>
-                                <input asp-for="TripStartCoord" class="form-control" />
-                                <span asp-validation-for="TripStartCoord" class="text-danger"></span>
+                                @*<label asp-for="TripStartCoord" class="control-label"></label>*@
+                                <input type="hidden" asp-for="TripStartCoord" class="form-control" />
+                                @*<span asp-validation-for="TripStartCoord" class="text-danger"></span>*@
                             </div>
                             <div class="form-group">
-                                <label asp-for="TripStopCoord" class="control-label"></label>
-                                <input asp-for="TripStopCoord" class="form-control" />
-                                <span asp-validation-for="TripStopCoord" class="text-danger"></span>
+                                @*<label asp-for="TripStopCoord" class="control-label"></label>*@
+                                <input type="hidden" asp-for="TripStopCoord" class="form-control" />
+                                @*<span asp-validation-for="TripStopCoord" class="text-danger"></span>*@
                             </div>
+                            @*Name Start*@
+                            <div>
+                                <label id="startCoordInput">Start</label>
+                            </div>
+                            <div>
+                                <label id="stopCoordInput">Stop</label>
+                            </div>
+                            @*Name Stop*@
                             <div class="form-group">
                                 <label asp-for="TripDateTime" class="control-label"></label>
                                 <input asp-for="TripDateTime" class="form-control" />
@@ -158,10 +211,10 @@
                                 </select>
                             </div>
                             @*<div class="form-group">
-            <label asp-for="TripCarSeats" class="control-label"></label>
-            <input asp-for="TripCarSeats" class="form-control" />
-            <span asp-validation-for="TripCarSeats" class="text-danger"></span>
-        </div>*@
+                                    <label asp-for="TripCarSeats" class="control-label"></label>
+                                    <input asp-for="TripCarSeats" class="form-control" />
+                                    <span asp-validation-for="TripCarSeats" class="text-danger"></span>
+                                </div>*@
                             <div class="form-group">
                                 <label asp-for="TripAnimals">Animals Allowed</label>
                                 <select class="form-control" id="TripAnimals">
@@ -170,19 +223,19 @@
                                 </select>
                             </div>
                             @*<div class="form-group">
-                                <label asp-for="TripAnimals" class="control-label"></label>
-                                <input asp-for="TripAnimals" class="form-control" />
-                                <span asp-validation-for="TripAnimals" class="text-danger"></span>
-                            </div>*@
+                                    <label asp-for="TripAnimals" class="control-label"></label>
+                                    <input asp-for="TripAnimals" class="form-control" />
+                                    <span asp-validation-for="TripAnimals" class="text-danger"></span>
+                                </div>*@
                             <div class="form-group">
                                 <label asp-for="TripInfoText">Custom Information</label>
                                 <textarea class="form-control" id="TripInfoText" rows="5"></textarea>
                             </div>
                             @*<div class="form-group">
-                                <label asp-for="TripInfoText" class="control-label"></label>
-                                <input asp-for="TripInfoText" class="form-control" />
-                                <span asp-validation-for="TripInfoText" class="text-danger"></span>
-                            </div>*@
+                                    <label asp-for="TripInfoText" class="control-label"></label>
+                                    <input asp-for="TripInfoText" class="form-control" />
+                                    <span asp-validation-for="TripInfoText" class="text-danger"></span>
+                                </div>*@
                             <div class="form-group">
                                 <input type="submit" value="Create" class="btn btn-primary" />
                             </div>
@@ -193,7 +246,7 @@
         </div>
     </div>
 </div>
-    
+
 @*JAVA LADDA KARTA*@
 <script async defer src="@Keys.GoogleApiKey()"></script>
 
