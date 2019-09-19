@@ -16,6 +16,10 @@ html {
 }
 body {
     margin-bottom: 60px;
+    background-image: url("../img/bg.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 @media (min-width: 768px) {
