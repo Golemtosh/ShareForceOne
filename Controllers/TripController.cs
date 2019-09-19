@@ -7,11 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ShareForceOne.Data;
 using ShareForceOne.Models;
+using ShareForceOne.Controllers;
 
 namespace ShareForceOne.Controllers
 {
     public class TripController : Controller
     {
+        string carList;
         private readonly ApplicationDbContext _context;
 
         public TripController(ApplicationDbContext context)
@@ -38,8 +40,18 @@ namespace ShareForceOne.Controllers
 
         public IActionResult TripCreate()
         {
+            var cars = from c in _context.Cars
+                       where c.CarCreator == User.FindFirstValue(ClaimTypes.NameIdentifier)
+                       select c;
+
+            foreach (var item in cars)
+            {
+                carList += "<option value="+item.CarId+">" + item.CarBrand + " " + item.CarBrandModel + " " + item.CarRegNumber + "</option>";
+            }
+            ViewBag.carList = carList;
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> TripDBCreate(TripModel tripModel)

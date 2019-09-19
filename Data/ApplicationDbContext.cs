@@ -12,13 +12,16 @@ namespace ShareForceOne.Data
         public DbSet<CarModel> Cars { get; set; }
         public DbSet<UserViewModel> UserViewModel { get; set; }
         public DbSet<TripModel> TripModel { get; set; }
+        public DbSet<ShareForceOne.Models.JoinTripModel> JoinTripModel { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
+        public ApplicationDbContext()
+        {
 
-        public DbSet<ShareForceOne.Models.JoinTripModel> JoinTripModel { get; set; }
+        }
 
 
     }

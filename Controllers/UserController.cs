@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ShareForceOne.Data;
 using ShareForceOne.Models;
+using ShareForceOne.Controllers;
 using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 
 namespace ShareForceOne.Controllers
@@ -82,7 +83,7 @@ namespace ShareForceOne.Controllers
             return View(nameof(SignUp));
         }
         public IActionResult Index()
-        {
+        {          
             return View(nameof(Index));
         }
 

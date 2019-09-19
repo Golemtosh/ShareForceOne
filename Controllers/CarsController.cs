@@ -12,6 +12,8 @@ namespace ShareForceOne.Controllers
 {
     public class CarsController : Controller
     {
+        public string carList;
+
         private readonly ApplicationDbContext _context;
 
         public CarsController(ApplicationDbContext context)
@@ -89,6 +91,22 @@ namespace ShareForceOne.Controllers
             await _context.SaveChangesAsync();
            
             return RedirectToAction(nameof(AdminListCars));
-        }        
+        }
+
+
+        public void CreateCarList()
+        {
+
+            var cars = from c in _context.Cars
+                       where c.CarCreator == User.FindFirstValue(ClaimTypes.NameIdentifier)
+                       select c;
+            
+            foreach (var item in cars)
+            {
+                carList += item.CarBrand + "," + item.CarBrandModel + "," + item.CarRegNumber + ",";              
+            }
+
+            ViewBag.carList = carList;
+        }
     }
 }
