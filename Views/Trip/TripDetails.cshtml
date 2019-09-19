@@ -29,44 +29,44 @@
                     calculateAndDisplayRoute(directionsService, directionsRenderer);
 
                     //Name fetch
-                    var geocoder = new google.maps.Geocoder;
+                    //var geocoder = new google.maps.Geocoder;
 
-                    geocoder.geocode({ 'location': posStart }, function (results, status)
-                    {
-                        if (status === 'OK')
-                        {
-                            if (results[0])
-                            {
-                                document.getElementById('startCoordInput').innerHTML = results[0].formatted_address;
-                            }
-                            else
-                            {
-                                window.alert('No results found');
-                            }
-                        }
-                        else
-                        {
-                          window.alert('Geocoder failed due to: ' + status);
-                        }
-                    });
-                    geocoder.geocode({ 'location': posStop }, function (results, status)
-                    {
-                        if (status === 'OK')
-                        {
-                            if (results[0])
-                            {
-                                document.getElementById('stopCoordInput').innerHTML = results[0].formatted_address;
-                            }
-                            else
-                            {
-                                window.alert('No results found');
-                            }
-                        }
-                        else
-                        {
-                          window.alert('Geocoder failed due to: ' + status);
-                        }
-                    });
+                    //geocoder.geocode({ 'location': posStart }, function (results, status)
+                    //{
+                    //    if (status === 'OK')
+                    //    {
+                    //        if (results[0])
+                    //        {
+                    //            document.getElementById('startCoordInput').innerHTML = results[0].formatted_address;
+                    //        }
+                    //        else
+                    //        {
+                    //            window.alert('No results found');
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //      window.alert('Geocoder failed due to: ' + status);
+                    //    }
+                    //});
+                    //geocoder.geocode({ 'location': posStop }, function (results, status)
+                    //{
+                    //    if (status === 'OK')
+                    //    {
+                    //        if (results[0])
+                    //        {
+                    //            document.getElementById('stopCoordInput').innerHTML = results[0].formatted_address;
+                    //        }
+                    //        else
+                    //        {
+                    //            window.alert('No results found');
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //      window.alert('Geocoder failed due to: ' + status);
+                    //    }
+                    //});
                     // ENd Name
 
                     function calculateAndDisplayRoute(directionsService, directionsRenderer) {
@@ -102,27 +102,41 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TripCarId)
         </dd>
+
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TripStartName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TripStartName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TripStopName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TripStopName)
+        </dd>
+
+        @*<dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TripStartCoord)
         </dt>
         <dd class="col-sm-10">
             <label id="startCoordInput">none</label>
-        </dd>
+        </dd>*@
         @*<dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TripStartCoord)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TripStartCoord)
-            </dd>*@
-        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TripStartCoord)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TripStartCoord)
+        </dd>*@
+        @*<dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TripStopCoord)
         </dt>
         <dd class="col-sm-10">
             <label id="stopCoordInput">none</label>
-        </dd>
+        </dd>*@
         @*<dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TripStopCoord)
-            </dd>*@
+            @Html.DisplayFor(model => model.TripStopCoord)
+        </dd>*@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TripCreator)
         </dt>

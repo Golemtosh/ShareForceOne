@@ -97,21 +97,15 @@ namespace ShareForceOne.Controllers
         // FUNCTIONS
         public static string GetLatFromId(string lat)
         {
-        
-            string latiuder = lat.Substring(1, 16);
-            Console.WriteLine(latiuder);
-            
-
+            string latiuder = lat.Substring(1, 7);
             return latiuder;
         }
         public static string GetLonFromId(string lon)
         {
-
-          string longitude = lon.Substring(19, 15);
-            
-
+            var longsplit = lon.Trim().Split(",");
+            string longitude = longsplit[1].ToString().Substring(0, 6);
             return longitude;
         }
-       
+
     }
 }
