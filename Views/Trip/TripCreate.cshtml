@@ -182,12 +182,14 @@
                             <div class="form-group">
                                 <label asp-for="TripStartName" class="control-label"></label>
                                 <label id="TripStartNameLabel" class="control-label"></label>
+                                <br />
                                 <input type="hidden" asp-for="TripStartName" class="form-control" />
                                 <span asp-validation-for="TripStartName" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="TripStopName" class="control-label"></label>
                                 <label id="TripStopNameLabel" class="control-label"></label>
+                                <br />
                                 <input type="hidden" asp-for="TripStopName" class="form-control" />
                                 <span asp-validation-for="TripStopName" class="text-danger"></span>
                             </div>
@@ -216,7 +218,7 @@
                                     <span asp-validation-for="TripCarSeats" class="text-danger"></span>
                                 </div>*@
                             <div class="form-group">
-                                <label asp-for="TripAnimals">Animals Allowed</label>
+                                <label asp-for="TripAnimals">Animals</label>
                                 <select class="form-control" asp-for="TripAnimals">
                                     <option value="0">No Animals</option>
                                     <option value="1">Animals Allowed</option>
