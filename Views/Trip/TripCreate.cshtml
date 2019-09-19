@@ -9,13 +9,13 @@
     <h4 style="padding: 8px;">Click once on map for ORIGIN, click again for DESTINATION</h4>
 
     @*<div>
-        <div class="container">
-            <div class="row">
+            <div class="container">
+                <div class="row">
 
-                <div class="col-md-4" style="padding: 8px;"><button class="btn btn-primary btn-block border rounded" type="button" onclick="clearMarkers();">Clear markers</button></div>
+                    <div class="col-md-4" style="padding: 8px;"><button class="btn btn-primary btn-block border rounded" type="button" onclick="clearMarkers();">Clear markers</button></div>
+                </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
     <div class="container" style="vertical-align: text-top; border: 0px solid #000000">
         <div class="row" style="vertical-align: text-top; border: 0px solid #000000">
             <div class="col-md-8 d-md-flex justify-content-md-center align-items-md-start" style="padding: 8px; vertical-align: text-top; border: 0px solid #000000">
@@ -25,6 +25,7 @@
                 <script>
 
                     let markersArray = [];
+                    var check = false;
 
                     function initMap() {
 
@@ -56,8 +57,126 @@
                         directionsRenderer.setMap(map);
 
                         map.addListener('click', function (e) {
+
+                            if (markersArray.length > 2) {
+                                clearMarkers();
+                            }
+
                             console.log(e);
                             addMarker(e.latLng);
+                        });
+
+                        //check if 2 places exist then calc
+                        map.addListener('bounds_changed', function (e) {
+                            if (markersArray.length === 2 && check == false) {
+                                check = true;
+                                onChangeHandler();
+                            }
+
+                            if (markersArray.length > 2) {
+                                clearMarkers();
+                            }
+
+                        });
+
+                        // Create the search box and link it to the UI element.
+                        var input = document.getElementById('searchCityStart');
+                        var searchBox = new google.maps.places.SearchBox(input);
+
+                        // Create the search box and link it to the UI element.
+                        var input2 = document.getElementById('searchCityEnd');
+                        var searchBox2 = new google.maps.places.SearchBox(input2);
+
+                        // Bias the SearchBox results towards current map's viewport.
+                        map.addListener('bounds_changed', function () {
+                            searchBox.setBounds(map.getBounds());
+                        });
+
+                        // Bias the SearchBox results towards current map's viewport.
+                        map.addListener('bounds_changed', function () {
+                            searchBox2.setBounds(map.getBounds());
+                        });
+
+                        // Listen for the event fired when the user selects a prediction and retrieve
+                        // more details for that place.
+                        searchBox.addListener('places_changed', function () {
+                            var places = searchBox.getPlaces();
+
+                            if (places.length == 0) {
+                                return;
+                            }
+
+                            // For each place, get the icon, name and location.
+                            var bounds = new google.maps.LatLngBounds();
+                            places.forEach(function (place) {
+                                if (!place.geometry) {
+                                    console.log("Returned place contains no geometry");
+                                    return;
+                                }
+                                var icon = {
+                                    url: place.icon,
+                                    size: new google.maps.Size(71, 71),
+                                    origin: new google.maps.Point(0, 0),
+                                    anchor: new google.maps.Point(17, 34),
+                                    scaledSize: new google.maps.Size(25, 25)
+                                };
+
+                                // Create a marker for each place.
+                                markersArray.push(new google.maps.Marker({
+                                    map: map,
+                                    icon: icon,
+                                    title: place.name,
+                                    position: place.geometry.location
+                                }));
+
+                                if (place.geometry.viewport) {
+                                    // Only geocodes have viewport.
+                                    bounds.union(place.geometry.viewport);
+                                } else {
+                                    bounds.extend(place.geometry.location);
+                                }
+                            });
+                            map.fitBounds(bounds);
+                        });
+
+                        searchBox2.addListener('places_changed', function () {
+                            var places = searchBox2.getPlaces();
+
+                            if (places.length == 0) {
+                                return;
+                            }
+
+                            // For each place, get the icon, name and location.
+                            var bounds = new google.maps.LatLngBounds();
+                            places.forEach(function (place) {
+                                if (!place.geometry) {
+                                    console.log("Returned place contains no geometry");
+                                    return;
+                                }
+                                var icon = {
+                                    url: place.icon,
+                                    size: new google.maps.Size(71, 71),
+                                    origin: new google.maps.Point(0, 0),
+                                    anchor: new google.maps.Point(17, 34),
+                                    scaledSize: new google.maps.Size(25, 25)
+                                };
+
+                                // Create a marker for each place.
+                                markersArray.push(new google.maps.Marker({
+                                    map: map,
+                                    icon: icon,
+                                    title: place.name,
+                                    position: place.geometry.location
+                                }));
+
+                                if (place.geometry.viewport) {
+                                    // Only geocodes have viewport.
+                                    bounds.union(place.geometry.viewport);
+                                } else {
+                                    bounds.extend(place.geometry.location);
+                                }
+                            });
+                            map.fitBounds(bounds);
                         });
 
 
@@ -144,10 +263,12 @@
                             });
 
                             // End
+
                         }
                     }
                     // Clear Markers
                     function clearMarkers() {
+                        check = false;
                         setMapOnAll(null);
                         markersArray = [];
                         initMap();
@@ -161,6 +282,8 @@
 
                 </script>
 
+
+
             </div>
 
             <div class="col-md-4" style="padding: 8px; ">
@@ -172,12 +295,12 @@
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <div class="form-group">
                                 <label asp-for="TripCarId">Car</label>
-                                
+
                                 <select class="form-control" asp-for="TripCarId">
                                     @Html.Raw(ViewBag.carList)
                                 </select>
                             </div>
-                           
+
                             <div class="form-group">
                                 @*<label asp-for="TripStartCoord" class="control-label"></label>*@
                                 <input type="hidden" asp-for="TripStartCoord" class="form-control" />
@@ -189,20 +312,29 @@
                                 @*<span asp-validation-for="TripStopCoord" class="text-danger"></span>*@
                             </div>
                             @*Name Start*@
+
                             <div class="form-group">
                                 <label asp-for="TripStartName" class="control-label"></label>
                                 <label id="TripStartNameLabel" class="control-label"></label>
                                 <br />
+
+                                <input placeholder="Search Origin" id="searchCityStart" type="text" asp-for="TripStartName" class="form-control" />
+
                                 <input type="hidden" asp-for="TripStartName" class="form-control" />
                                 <span asp-validation-for="TripStartName" class="text-danger"></span>
                             </div>
+
                             <div class="form-group">
                                 <label asp-for="TripStopName" class="control-label"></label>
                                 <label id="TripStopNameLabel" class="control-label"></label>
                                 <br />
+
+                                <input placeholder="Search desination" id="searchCityEnd" type="text" asp-for="TripStartName" class="form-control" />
+
                                 <input type="hidden" asp-for="TripStopName" class="form-control" />
                                 <span asp-validation-for="TripStopName" class="text-danger"></span>
                             </div>
+
                             @*Name Stop*@
                         <div class="form-group">
                             <label id="TripDateTime" class="control-label">Lenght/Time</label>
@@ -228,10 +360,10 @@
                                 </select>
                             </div>
                             @*<div class="form-group">
-            <label asp-for="TripCarSeats" class="control-label"></label>
-            <input asp-for="TripCarSeats" class="form-control" />
-            <span asp-validation-for="TripCarSeats" class="text-danger"></span>
-        </div>*@
+                                    <label asp-for="TripCarSeats" class="control-label"></label>
+                                    <input asp-for="TripCarSeats" class="form-control" />
+                                    <span asp-validation-for="TripCarSeats" class="text-danger"></span>
+                                </div>*@
                             <div class="form-group">
                                 <label asp-for="TripAnimals">Animals</label>
                                 <select class="form-control" asp-for="TripAnimals">
@@ -241,19 +373,19 @@
 
                             </div>
                             @*<div class="form-group">
-            <label asp-for="TripAnimals" class="control-label"></label>
-            <input asp-for="TripAnimals" class="form-control" />
-            <span asp-validation-for="TripAnimals" class="text-danger"></span>
-        </div>*@
+                                    <label asp-for="TripAnimals" class="control-label"></label>
+                                    <input asp-for="TripAnimals" class="form-control" />
+                                    <span asp-validation-for="TripAnimals" class="text-danger"></span>
+                                </div>*@
                             <div class="form-group">
                                 <label asp-for="TripInfoText">Custom Information</label>
                                 <textarea class="form-control" asp-for="TripInfoText" rows="5"></textarea>
                             </div>
                             @*<div class="form-group">
-            <label asp-for="TripInfoText" class="control-label"></label>
-            <input asp-for="TripInfoText" class="form-control" />
-            <span asp-validation-for="TripInfoText" class="text-danger"></span>
-        </div>*@
+                                    <label asp-for="TripInfoText" class="control-label"></label>
+                                    <input asp-for="TripInfoText" class="form-control" />
+                                    <span asp-validation-for="TripInfoText" class="text-danger"></span>
+                                </div>*@
                             <div class="row">
                                 <div class="col-md-12" style="width: 100%;">
 
