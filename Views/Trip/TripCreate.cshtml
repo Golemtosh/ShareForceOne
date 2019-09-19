@@ -207,7 +207,7 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="TripCarSeats">Avaiable Seats</label>
-                                <select class="form-control" id="TripCarSeats">
+                                <select class="form-control"  asp-for="TripCarSeats">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -225,10 +225,11 @@
         </div>*@
                             <div class="form-group">
                                 <label asp-for="TripAnimals">Animals Allowed</label>
-                                <select class="form-control" id="TripAnimals">
+                                <select class="form-control" asp-for="TripAnimals">
                                     <option value="0">No Animals</option>
                                     <option value="1">Animals Allowed</option>
                                 </select>
+                                    
                             </div>
                             @*<div class="form-group">
             <label asp-for="TripAnimals" class="control-label"></label>
@@ -237,7 +238,7 @@
         </div>*@
                             <div class="form-group">
                                 <label asp-for="TripInfoText">Custom Information</label>
-                                <textarea class="form-control" id="TripInfoText" rows="5"></textarea>
+                                <textarea class="form-control" asp-for="TripInfoText" rows="5"></textarea>
                             </div>
                             @*<div class="form-group">
             <label asp-for="TripInfoText" class="control-label"></label>
