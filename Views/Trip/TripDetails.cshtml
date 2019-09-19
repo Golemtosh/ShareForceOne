@@ -28,47 +28,6 @@
 
                     calculateAndDisplayRoute(directionsService, directionsRenderer);
 
-                    //Name fetch
-                    //var geocoder = new google.maps.Geocoder;
-
-                    //geocoder.geocode({ 'location': posStart }, function (results, status)
-                    //{
-                    //    if (status === 'OK')
-                    //    {
-                    //        if (results[0])
-                    //        {
-                    //            document.getElementById('startCoordInput').innerHTML = results[0].formatted_address;
-                    //        }
-                    //        else
-                    //        {
-                    //            window.alert('No results found');
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //      window.alert('Geocoder failed due to: ' + status);
-                    //    }
-                    //});
-                    //geocoder.geocode({ 'location': posStop }, function (results, status)
-                    //{
-                    //    if (status === 'OK')
-                    //    {
-                    //        if (results[0])
-                    //        {
-                    //            document.getElementById('stopCoordInput').innerHTML = results[0].formatted_address;
-                    //        }
-                    //        else
-                    //        {
-                    //            window.alert('No results found');
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //      window.alert('Geocoder failed due to: ' + status);
-                    //    }
-                    //});
-                    // ENd Name
-
                     function calculateAndDisplayRoute(directionsService, directionsRenderer) {
                         directionsService.route(
                             {
@@ -95,7 +54,7 @@
 <div>
     <h4>Info</h4>
     <hr />
-    <dl class="row" style="border: 1px solid #000000">
+    <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TripCarId)
         </dt>
@@ -115,28 +74,6 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TripStopName)
         </dd>
-
-        @*<dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TripStartCoord)
-        </dt>
-        <dd class="col-sm-10">
-            <label id="startCoordInput">none</label>
-        </dd>*@
-        @*<dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TripStartCoord)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TripStartCoord)
-        </dd>*@
-        @*<dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TripStopCoord)
-        </dt>
-        <dd class="col-sm-10">
-            <label id="stopCoordInput">none</label>
-        </dd>*@
-        @*<dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TripStopCoord)
-        </dd>*@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TripCreator)
         </dt>
@@ -176,8 +113,8 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.TripId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <div class="col-md-6 align-self-center" style="padding: 8px;"><a class="btn btn-primary btn-block border rounded" role="button" asp-area="" asp-route-id="@Model.TripId" asp-controller="JoinTrip" asp-action="JoinTrip">Join this trip</a></div> |
+    <a asp-action="ListTrips">Back to List</a>
 </div>
 
 
