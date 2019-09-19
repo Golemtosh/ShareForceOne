@@ -21,6 +21,12 @@ namespace ShareForceOne.Models
         [DisplayName("End position")]
         public string TripStopCoord { get; set; }
 
+        [DisplayName("Start position name")]
+        public string TripStartName { get; set; }
+
+        [DisplayName("End position name")]
+        public string TripStopName { get; set; }
+
         [DisplayName("Creator")]
         public string TripCreator { get; set; }
 
