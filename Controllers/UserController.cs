@@ -8,11 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using ShareForceOne.Data;
 using ShareForceOne.Models;
+using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 
 namespace ShareForceOne.Controllers
 {
     public class UserController : Controller
     {
+        
+
         private readonly ApplicationDbContext _context;
 
         public UserManager<ApplicationUser> UserMgr { get; }
@@ -173,5 +176,11 @@ namespace ShareForceOne.Controllers
 
         }
 
+        
+        public string GetUserNameFromId(string aId)
+        {
+            var user = _context.Users.Find(aId);
+            return user.FirstName + " " + user.LastName;
+        }
     }
 }

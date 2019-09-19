@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<ShareForceOne.Models.TripModel>
-
+@using ShareForceOne.Controllers;
 @{
     ViewData["Title"] = "ListTrips";
 }
@@ -18,9 +18,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.TripStopCoord)
             </th>
-            @*<th>
+            <th>
                     @Html.DisplayNameFor(model => model.TripCreator)
-                </th>*@
+                </th>
             @*<th>
                     @Html.DisplayNameFor(model => model.TripKMCost)
                 </th>*@
@@ -50,21 +50,16 @@
                         @Html.DisplayFor(modelItem => item.TripCarId)
                     </td>*@
                 <td>
-                    @*@Html.DisplayFor(modelItem => item.TripStartCoord)*@
-                    <label id="@item.TripId">
-                        @item.TripId
-                    </label>
+                    @Html.DisplayFor(modelItem => item.TripStartName)     
                 </td>
                 <td>
-                    @*@Html.DisplayFor(modelItem => item.TripStopCoord)*@
-                    <label id="stopCoordLabel">
-                        @item.TripId
-                    </label>
+                    @Html.DisplayFor(modelItem => item.TripStopName)    
                 </td>
                 @*<td>
+                    
                         @Html.DisplayFor(modelItem => item.TripCreator)
-                    </td>
-                    <td>
+                    </td>*@
+                    @*<td>
                         @Html.DisplayFor(modelItem => item.TripKMCost)
                     </td>*@
                 <td>
