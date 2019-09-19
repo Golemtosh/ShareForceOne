@@ -53,9 +53,7 @@ namespace ShareForceOne.Controllers
             // Skickar användaren till User/Index
             return View(nameof(Index));
 
-
-
-            //// Kod som kan användas för att skapa en etestanvändare. 
+            //// Kod som kan användas för att skapa en testanvändare. 
             //
             //// Letar upp om det finns en användare med namner Username
             //// Om inte FindByNameAsync hittar användaren Username så skapar den en testanvändare. 
@@ -114,7 +112,7 @@ namespace ShareForceOne.Controllers
             return View(userList);
         }
 
-        // DELETE   PROBLEM!     
+        // DELETE      
         public async Task<IActionResult> AdminDeleteUser(string id)
         {
             if (id == null)
@@ -177,10 +175,9 @@ namespace ShareForceOne.Controllers
         }
 
         
-        public string GetUserNameFromId(string aId)
-        {
-            var user = _context.Users.Find(aId);
-            return user.FirstName + " " + user.LastName;
-        }
+
+        
     }
+
+    
 }

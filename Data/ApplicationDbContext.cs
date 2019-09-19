@@ -18,6 +18,8 @@ namespace ShareForceOne.Data
         {
         }
 
+        public DbSet<ShareForceOne.Models.JoinTripModel> JoinTripModel { get; set; }
+
 
     }
 }

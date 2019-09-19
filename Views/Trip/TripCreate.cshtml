@@ -8,14 +8,14 @@
 <div>
     <h4 style="padding: 8px;">Click once on map for ORIGIN, click again for DESTINATION</h4>
 
-    <div>
+    @*<div>
         <div class="container">
             <div class="row">
 
                 <div class="col-md-4" style="padding: 8px;"><button class="btn btn-primary btn-block border rounded" type="button" onclick="clearMarkers();">Clear markers</button></div>
             </div>
         </div>
-    </div>
+    </div>*@
     <div class="container" style="vertical-align: text-top; border: 0px solid #000000">
         <div class="row" style="vertical-align: text-top; border: 0px solid #000000">
             <div class="col-md-8 d-md-flex justify-content-md-center align-items-md-start" style="padding: 8px; vertical-align: text-top; border: 0px solid #000000">
@@ -144,6 +144,7 @@
                     function clearMarkers() {
                         setMapOnAll(null);
                         markersArray = [];
+                        initMap();
                     }
                     // Sets the map on all markers in the array.
                     function setMapOnAll(map) {
@@ -202,6 +203,7 @@
                             <div class="form-group">
                                 <label asp-for="TripCarSeats">Avaiable Seats</label>
                                 <select class="form-control" asp-for="TripCarSeats">
+v             
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -250,7 +252,7 @@
                                 </div>
                                 <div class="col-md-12" style="width: 100%;">
                                     <div class="form-group">
-                                        <input type="reset" value="Cancel" class="btn btn-danger" />
+                                        <input type="reset" value="Clear all" onclick="clearMarkers()"; class="btn btn-danger" />
                                     </div>
                                 </div>
                             </div>
