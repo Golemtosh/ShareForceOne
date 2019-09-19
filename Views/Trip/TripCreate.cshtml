@@ -93,6 +93,12 @@
                                     if (status === 'OK') {
                                         directionsRenderer.setDirections(response);
 
+                                       
+                                            var point = response.routes[ 0 ].legs[ 0 ];
+                                            $( '#travel_data' ).html( 'Estimated travel time: ' + point.duration.text + ' (' + point.distance.text + ')' );
+                                        
+
+
                                     } else {
                                         window.alert('Directions request failed due to ' + status);
                                     }
@@ -198,6 +204,10 @@
                                 <span asp-validation-for="TripStopName" class="text-danger"></span>
                             </div>
                             @*Name Stop*@
+                        <div class="form-group">
+                            <label id="TripDateTime" class="control-label">Lenght/Time</label>
+                            <div id="travel_data"></div>
+                        </div>
                             <div class="form-group">
                                 <label asp-for="TripDateTime" class="control-label"></label>
                                 <input asp-for="TripDateTime" class="form-control" />
