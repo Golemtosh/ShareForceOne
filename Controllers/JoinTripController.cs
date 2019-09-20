@@ -58,15 +58,10 @@ namespace ShareForceOne.Controllers
 
                 string sendsmstext = "Namn har joinat din resa med meddelande: " + joinTrip.JoinTripNotes;
                 // Test
-                try
-                {
+                
                     SendSMS(sendsmstext);
 
-                }
-                catch (Exception e)
-                {
-                    
-                }
+                
                 // Test
 
                 return RedirectToAction("Index", "User");
@@ -77,14 +72,26 @@ namespace ShareForceOne.Controllers
         public async void SendSMS(string message)
         {
 
-            string url = "https://se-1.cellsynt.net/sms.php?username=tomasslattman&password=X1TwBSG1&destination=0046701750045&originatortype=numeric&originator=46700456456&charset=UTF-8&text=" + message;
-            
+                string url = "https://se-1.cellsynt.net/sms.php?username=tomasslattman&password=X1TwBSG1&destination=0046701750045&originatortype=numeric&originator=46700456456&charset=UTF-8&text=" + message;
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request.KeepAlive = false;
+                request.Timeout = 10000;
                 request.Method = "POST";
                 request.ContentType = "application/json";
                 request.ContentLength = url.Length;
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-           
+
+            try
+            {
+
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
         }
 
 
