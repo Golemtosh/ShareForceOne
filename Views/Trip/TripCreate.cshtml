@@ -390,7 +390,12 @@
                                 <div class="col-md-12" style="width: 100%;">
 
                                     <div class="form-group">
-                                        <input type="submit" value="Create" class="btn btn-success" />
+                                        <input type="submit" value="Create" onclick="Created()" class="btn btn-success" />
+                                        <script>
+                                            function Created() {
+                                                alert("Successfully made a trip!");
+                                            }
+                                        </script>
 
                                         <input type="button" value=" Back  " class="btn btn-primary" onclick="location.href='../User/'" />
                                     </div>
