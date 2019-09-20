@@ -21,6 +21,11 @@ namespace ShareForceOne.Controllers
             _context = context;
         }
 
+        public IActionResult AdminJoinTripList()
+        {
+            var joinTrip = from c in _context.JoinTripModel select c;
+            return View(joinTrip);
+        }
 
         public IActionResult Index()
         {
@@ -53,7 +58,15 @@ namespace ShareForceOne.Controllers
 
                 string sendsmstext = "Namn har joinat din resa med meddelande: " + joinTrip.JoinTripNotes;
                 // Test
-                SendSMS(sendsmstext);
+                try
+                {
+                    SendSMS(sendsmstext);
+
+                }
+                catch (Exception e)
+                {
+                    
+                }
                 // Test
 
                 return RedirectToAction("Index", "User");
